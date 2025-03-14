@@ -17,18 +17,13 @@ def normalize(schema_col_list, rows):
     header_row.extend(missing_cols)
     final_col_order = schema_col_list + extra_cols
     exchange_map = [[i, header_row.index(c)] for i, c in enumerate(final_col_order)]
-    print(header_row)
-    print(exchange_map)
-    print(final_col_order)
-    final_data_rows = []
+    final_data_rows = [final_col_order]
     for row in data_rows:
-        row_temp = [row[j] for i, j in exchange_map]
-        print(row_temp)
-    print(extra_cols)
-    print(missing_cols)
-    return rows
+        final_data_rows.append([row[j] for i, j in exchange_map])
+    return final_data_rows
 
 
 if __name__ == "__main__":
     rows_1 = normalize(schema_col_list, rows)
-    # print(rows_1)
+    for r in rows_1:
+        print(r)
